@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { poppins } from "@/public/assets/fonts/poppins";
-import { useState,ReactNode } from "react";
+import { useState,ReactNode, MouseEvent } from "react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { BsLink45Deg } from "react-icons/bs";
@@ -110,7 +110,7 @@ const Actionbar = ({resetAlbum, mode, album, deleteAlbum } : { resetAlbum: () =>
         
         <HiOutlineMenu
           className="lg:w-10 lg:h-10 w-8 h-8 m-2 cursor-pointer hover:scale-[115%] relative"
-          onClick={(e: Event) => {
+          onClick={(e:MouseEvent<SVGElement>) => {
             e.preventDefault();
             setisMenuOpen((prev) => !prev);
           }}/>

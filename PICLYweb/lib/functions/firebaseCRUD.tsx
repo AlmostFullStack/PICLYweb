@@ -151,7 +151,7 @@ export const createDefaultAlbum = async (uid: string) => {
   const blob = await response.blob();
   const imgFile:File = new File([blob], defaultImageUrl.split('/').pop()!, {type: 'image/jpeg'});
   
-  await createAlbum(uid, new Date(new Date().setDate(new Date().getDate() + 7)), ['우리집_고양이'], [imgFile], [{width: 692 * 4, height: 692 * 4}]);
+  await createAlbum(uid, new Date(new Date().setDate(new Date().getDate() + 30)), ['새로운','공유의','시작'], [imgFile], [{width: 692 * 4, height: 692 * 4}]);
   console.log('default album created');
 }
 
