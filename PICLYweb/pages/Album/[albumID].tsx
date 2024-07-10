@@ -6,10 +6,9 @@ import ExpiredPage from "@/components/page/ExpiredPage";
 import { useBodyScrollLock } from "@/lib/functions/scrollLock";
 import { useEffect } from "react";
 import Carousel from "@/components/page/Carousel";
-import { getPlaiceholder } from "plaiceholder";
 import { dynamicBlurDataUrl } from "@/lib/functions/dynamicBlurDataURL";
 
-const ImageView = ({ album, valid, blurImg }: { album: Album|null, valid:boolean, blurImg:string }) => {
+const ImageView = ({ album, valid }: { album: Album|null, valid:boolean }) => {
   
   const { lockScroll, openScroll } = useBodyScrollLock();
 
@@ -20,11 +19,10 @@ const ImageView = ({ album, valid, blurImg }: { album: Album|null, valid:boolean
 
   if(!valid) return  <FallbackPage/>
   else if(!album) return <ExpiredPage/>
-  // console.log('blurImg:',blurImg)
 
   return (
     <div className="(background) w-screen h-screen absolute bg-black">
-      <Carousel album={album} blurImg={blurImg}/>
+      <Carousel album={album} />
       <Actionbar resetAlbum={() => {}} mode="guest" album={album} deleteAlbum={()=>{}} />
     </div>
   );
@@ -52,15 +50,12 @@ export async function getServerSideProps({ query }: { query: { albumID: string }
     
       //increase viewCount
       updateViewCount(album_.albumID!,album_.viewCount+1);
-      
-      //generate blurImageURL
-      const blurImg = await dynamicBlurDataUrl(album_.thumbnailURL!);
-      // console.log('blurImg:',blurImg)
+    
       
       if(new Date(album_.expireTime).getTime() > new Date().getTime()){
         return {
           //album found and viewable
-          props: { album:album, valid:true, blurImg: blurImg } ,
+          props: { album:album, valid:true } ,
         };
       }
       else return {

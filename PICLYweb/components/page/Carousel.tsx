@@ -81,7 +81,7 @@ const Indicators = ({
     </div>
   );
 };
-const Carousel = ({ album,blurImg }: { album: Album, blurImg:string }) => {
+const Carousel = ({ album }: { album: Album }) => {
   const steps = album.imageURLs.length;
   //useState
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -139,8 +139,6 @@ const Carousel = ({ album,blurImg }: { album: Album, blurImg:string }) => {
     }, 50);
   };
 
-  console.log('blurImg:',blurImg);
-
   const imageList = album.imageURLs.map((url, idx) => (
     <div
       key={idx}
@@ -163,9 +161,6 @@ const Carousel = ({ album,blurImg }: { album: Album, blurImg:string }) => {
         className="relative object-contain scale-[90%] lg:translate-y-0 translate-y-[2rem]"
         draggable={false}
         priority={true}
-        placeholder='blur'
-        blurDataURL={blurImg}
-        
       ></Image>
     </div>
   ));
